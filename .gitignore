@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Local environment
+local.properties
+
+# Native build artifacts
+.cxx/
+.externalNativeBuild/
+
+# Logs
+*.log
