@@ -34,6 +34,7 @@ class DeepSeekRepository(
             stream = true,
             messages = messages,
             maxTokens = variant.maxTokens,
+            temperature = variant.temperature,
         )
 
         val response = api.chatCompletionsStream(request)

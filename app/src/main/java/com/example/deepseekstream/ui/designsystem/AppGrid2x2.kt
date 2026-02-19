@@ -30,7 +30,7 @@ fun AppGrid2x2(
     items: List<Pair<String, String>>,
     modifier: Modifier = Modifier
 ) {
-    val normalized = (items + List((4 - items.size).coerceAtLeast(0)) { "" to "" }).take(4)
+    val normalized = items
     var gridHeightPx by remember { mutableIntStateOf(0) }
     val density = LocalDensity.current
     val spacingPx = with(density) { 8.dp.roundToPx() }

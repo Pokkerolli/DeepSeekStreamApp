@@ -3,10 +3,10 @@ package com.example.deepseekstream.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -19,22 +19,47 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.deepseekstream.presentation.task2.Task2ViewModel
+import com.example.deepseekstream.presentation.task4.Task4State
+import com.example.deepseekstream.presentation.task4.Task4ViewModel
 import com.example.deepseekstream.ui.designsystem.AppButton
 import com.example.deepseekstream.ui.designsystem.AppGrid2x2
+import com.example.deepseekstream.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Task2Screen(
-    viewModel: Task2ViewModel = koinViewModel()
+fun Task4Screen(
+    viewModel: Task4ViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+
+    Task4Content(
+        state = state,
+        onQuestionChanged = viewModel::onQuestionChanged,
+        onRunClick = viewModel::runTest,
+        onCancelClick = viewModel::cancelRun,
+        onClearSnackbar = viewModel::clearSnackbar
+    )
+}
+
+private fun countChars(text: String): Int {
+    return text.length
+}
+
+@Composable
+private fun Task4Content(
+    state: Task4State,
+    onQuestionChanged: (String) -> Unit,
+    onRunClick: () -> Unit,
+    onCancelClick: () -> Unit,
+    onClearSnackbar: () -> Unit
+) {
     val snackbarHostState = remember { SnackbarHostState() }
     val configuration = LocalConfiguration.current
     val density = LocalDensity.current
@@ -53,7 +78,7 @@ fun Task2Screen(
     LaunchedEffect(state.snackbarMessage) {
         val message = state.snackbarMessage ?: return@LaunchedEffect
         snackbarHostState.showSnackbar(message)
-        viewModel.clearSnackbar()
+        onClearSnackbar()
     }
 
     LaunchedEffect(state.question) {
@@ -61,6 +86,11 @@ fun Task2Screen(
             questionField = TextFieldValue(state.question)
         }
     }
+
+    val output1Chars = countChars(state.output1)
+    val output2Chars = countChars(state.output2)
+    val output3Chars = countChars(state.output3)
+    val output4Chars = countChars(state.output4)
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -81,7 +111,7 @@ fun Task2Screen(
                     value = questionField,
                     onValueChange = {
                         questionField = it
-                        viewModel.onQuestionChanged(it.text)
+                        onQuestionChanged(it.text)
                     },
                     label = { androidx.compose.material3.Text("Введите вопрос..") },
                     minLines = 2,
@@ -93,7 +123,7 @@ fun Task2Screen(
                 AppButton(
                     text = if (state.isRunning) "Прервать" else "Запустить тест",
                     onClick = {
-                        if (state.isRunning) viewModel.cancelRun() else viewModel.runTest()
+                        if (state.isRunning) onCancelClick() else onRunClick()
                     },
                     enabled = true,
                     loading = state.isRunning
@@ -102,15 +132,33 @@ fun Task2Screen(
 
             AppGrid2x2(
                 items = listOf(
-                    "output1: ответ без доп. инструкций" to state.output1,
-                    "output2: пошаговый ответ" to state.output2,
-                    "output3: сначала составь промт, потом дай ответ" to state.output3,
-                    "output4: рассмотрение вопроса через группу экспертов" to state.output4
+                    "temperature = 0: точность, минимум креатива (символов: $output1Chars)" to state.output1,
+                    "temperature = 0.7: баланс точности и естественности (символов: $output2Chars)" to state.output2,
+                    "temperature = 1.2: креатив, мозговой штурм (символов: $output3Chars)" to state.output3,
+                    "Выводы по разной temperature (символов: $output4Chars)" to state.output4
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(gridHeight)
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun Task4ScreenPreview() {
+    AppTheme {
+        Task4Content(
+            state = Task4State(
+                output1 = "Пример output1",
+                output2 = "Пример output2",
+                output3 = "Пример output3",
+            ),
+            onQuestionChanged = {},
+            onRunClick = {},
+            onCancelClick = {},
+            onClearSnackbar = {}
+        )
     }
 }

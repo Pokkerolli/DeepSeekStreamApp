@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.deepseekstream.ui.screens.StartScreen
 import com.example.deepseekstream.ui.screens.Task1Screen
 import com.example.deepseekstream.ui.screens.Task2Screen
+import com.example.deepseekstream.ui.screens.Task4Screen
 
 @Composable
 fun AppNavGraph() {
@@ -19,7 +20,8 @@ fun AppNavGraph() {
         composable(NavRoutes.START) {
             StartScreen(
                 onTask1Click = { navController.navigate(NavRoutes.TASK1) },
-                onTask2Click = { navController.navigate(NavRoutes.TASK2) }
+                onTask2Click = { navController.navigate(NavRoutes.TASK2) },
+                onTask4Click = { navController.navigate(NavRoutes.TASK4) }
             )
         }
         composable(NavRoutes.TASK1) {
@@ -27,6 +29,9 @@ fun AppNavGraph() {
         }
         composable(NavRoutes.TASK2) {
             Task2Screen()
+        }
+        composable(NavRoutes.TASK4) {
+            Task4Screen()
         }
     }
 }

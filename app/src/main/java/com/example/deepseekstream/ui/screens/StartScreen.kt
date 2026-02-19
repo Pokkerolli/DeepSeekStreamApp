@@ -15,7 +15,8 @@ import com.example.deepseekstream.ui.designsystem.AppButton
 @Composable
 fun StartScreen(
     onTask1Click: () -> Unit,
-    onTask2Click: () -> Unit
+    onTask2Click: () -> Unit,
+    onTask4Click: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -33,6 +34,12 @@ fun StartScreen(
         AppButton(
             text = "Второе задание",
             onClick = onTask2Click,
+            enabled = true
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        AppButton(
+            text = "Четвертое задание",
+            onClick = onTask4Click,
             enabled = true
         )
     }

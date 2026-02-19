@@ -6,6 +6,7 @@ import com.example.deepseekstream.data.parser.StreamingParser
 import com.example.deepseekstream.data.repository.DeepSeekRepository
 import com.example.deepseekstream.domain.usecase.RunDeepSeekTestUseCase
 import com.example.deepseekstream.presentation.task2.Task2ViewModel
+import com.example.deepseekstream.presentation.task4.Task4ViewModel
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -72,6 +73,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { Task2ViewModel(get()) }
+    viewModel { Task4ViewModel(get()) }
 }
 
 val appModules = listOf(
