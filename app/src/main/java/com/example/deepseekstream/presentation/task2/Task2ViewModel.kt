@@ -2,7 +2,7 @@ package com.example.deepseekstream.presentation.task2
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.deepseekstream.domain.model.DeepSeekVariant
+import com.example.deepseekstream.domain.model.LLMVariant
 import com.example.deepseekstream.domain.usecase.RunDeepSeekTestUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.CancellationException
@@ -20,17 +20,17 @@ class Task2ViewModel(
 ) : ViewModel() {
 
     private val variants = listOf(
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output1",
             systemPrompt = null,
             maxTokens = 1000,
         ),
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output2",
             systemPrompt = "Решай задачу пошагово. После напиши \"Ответ: \" и дай сразу ответ",
             maxTokens = 1000,
         ),
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output3",
             systemPrompt = "Ты — модель, работающая в два этапа при решении любой пользовательской задачи.\n" +
                     "Обязательный порядок действий:\n" +
@@ -48,7 +48,7 @@ class Task2ViewModel(
                     "Итоговый ответ должен строго соответствовать сформированному промпту.",
             maxTokens = 2000,
         ),
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output4",
             systemPrompt = "Ты — система коллективного аналитического мышления.\n" +
                     "При получении задачи действуй строго по шагам:\n" +

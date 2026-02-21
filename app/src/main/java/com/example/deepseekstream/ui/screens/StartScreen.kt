@@ -16,7 +16,8 @@ import com.example.deepseekstream.ui.designsystem.AppButton
 fun StartScreen(
     onTask1Click: () -> Unit,
     onTask2Click: () -> Unit,
-    onTask4Click: () -> Unit
+    onTask4Click: () -> Unit,
+    onTask5Click: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -40,6 +41,12 @@ fun StartScreen(
         AppButton(
             text = "Четвертое задание",
             onClick = onTask4Click,
+            enabled = true
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        AppButton(
+            text = "Пятое задание",
+            onClick = onTask5Click,
             enabled = true
         )
     }

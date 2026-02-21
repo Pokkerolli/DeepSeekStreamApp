@@ -5,4 +5,5 @@ object NavRoutes {
     const val TASK1 = "task1"
     const val TASK2 = "task2"
     const val TASK4 = "task4"
+    const val TASK5 = "task5"
 }

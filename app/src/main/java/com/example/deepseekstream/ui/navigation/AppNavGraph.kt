@@ -8,6 +8,7 @@ import com.example.deepseekstream.ui.screens.StartScreen
 import com.example.deepseekstream.ui.screens.Task1Screen
 import com.example.deepseekstream.ui.screens.Task2Screen
 import com.example.deepseekstream.ui.screens.Task4Screen
+import com.example.deepseekstream.ui.screens.Task5Screen
 
 @Composable
 fun AppNavGraph() {
@@ -21,7 +22,8 @@ fun AppNavGraph() {
             StartScreen(
                 onTask1Click = { navController.navigate(NavRoutes.TASK1) },
                 onTask2Click = { navController.navigate(NavRoutes.TASK2) },
-                onTask4Click = { navController.navigate(NavRoutes.TASK4) }
+                onTask4Click = { navController.navigate(NavRoutes.TASK4) },
+                onTask5Click = { navController.navigate(NavRoutes.TASK5) }
             )
         }
         composable(NavRoutes.TASK1) {
@@ -32,6 +34,9 @@ fun AppNavGraph() {
         }
         composable(NavRoutes.TASK4) {
             Task4Screen()
+        }
+        composable(NavRoutes.TASK5) {
+            Task5Screen()
         }
     }
 }

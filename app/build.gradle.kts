@@ -15,6 +15,7 @@ val localProps = Properties().apply {
 }
 
 val deepSeekApiKey = localProps.getProperty("DEEPSEEK_API_KEY", "")
+val OPENROUTERApiKey = localProps.getProperty("OPENROUTER_API_KEY", "")
 
 android {
     namespace = "com.example.deepseekstream"
@@ -30,7 +31,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "DEEPSEEK_API_KEY", "\"$deepSeekApiKey\"")
         buildConfigField("String", "DEEPSEEK_BASE_URL", "\"https://api.deepseek.com/\"")
-        buildConfigField("String", "DEEPSEEK_MODEL", "\"deepseek-chat\"")
+        buildConfigField("String", "DEEPSEEK_MODEL", "\"deepseek-reasoner\"")
+        buildConfigField("String", "OPENROUTER_API_KEY", "\"$OPENROUTERApiKey\"")
+        buildConfigField("String", "OPENROUTER_BASE_URL", "\"https://openrouter.ai/api/v1/\"")
     }
 
     buildTypes {

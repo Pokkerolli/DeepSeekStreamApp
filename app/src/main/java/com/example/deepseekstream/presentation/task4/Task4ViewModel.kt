@@ -2,7 +2,7 @@ package com.example.deepseekstream.presentation.task4
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.deepseekstream.domain.model.DeepSeekVariant
+import com.example.deepseekstream.domain.model.LLMVariant
 import com.example.deepseekstream.domain.usecase.RunDeepSeekTestUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.CancellationException
@@ -20,19 +20,19 @@ class Task4ViewModel(
 ) : ViewModel() {
 
     private val temperatureVariants = listOf(
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output1",
             systemPrompt = null,
             maxTokens = 1000,
             temperature = 0.0,
         ),
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output2",
             systemPrompt = null,
             maxTokens = 1000,
             temperature = 0.7,
         ),
-        DeepSeekVariant(
+        LLMVariant(
             outputKey = "output3",
             systemPrompt = null,
             maxTokens = 1000,
@@ -40,7 +40,7 @@ class Task4ViewModel(
         )
     )
 
-    private val comparisonVariant = DeepSeekVariant(
+    private val comparisonVariant = LLMVariant(
         outputKey = "output4",
         systemPrompt = "Сравни три ответа на один и тот же вопрос при разных temperature. " +
                 "Дай краткий анализ отличий по точности, полноте, креативности и риску ошибок. " +
